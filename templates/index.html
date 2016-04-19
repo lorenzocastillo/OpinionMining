@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Opinion Miner</title>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Please write your review</h2>
+        {% from "_formhelpers.html" import render_field %}
+
+        <form method=post action="/results" class="form-group">
+            <dl>
+                {{ render_field(form.movie_review, cols=30, rows=10) }}
+            </dl>
+            <input type=submit value="Review" name="submit_btn">
+        </form>
+    </div>
+    </body>
+</html>
