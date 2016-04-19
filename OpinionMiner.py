@@ -114,19 +114,3 @@ def mine():
     pickle.dump(clf, open(os.path.join(dest,'classifier.pkl'),'wb'), protocol=4)
 
 #mine()
-
-clf = pickle.load(open(os.path.join('pkl_objects','classifier.pkl'),'rb'))
-label = {0:'neg',1:'pos'}
-example = ['i love this movie']
-X = vect.transform(example)
-print('pred: %s\nProb: %.2f%%' % (label[clf.predict(X)[0]],np.max(clf.predict_proba(X)) * 100))
-
-conn = sqlite3.connect('reviews.sqlite')
-c = conn.cursor()
-c.execute("CREATE TABLE review_db (review TEXT, sentiment INTEGER, date TEXT)")
-example1 = example[0]
-c.execute("INSERT INTO review_db (review, sentiment, date) VALUES (?,?,DATETIME('now'))", (example1,1))
-example2 = 'i disliked this movie'
-c.execute("INSERT INTO review_db (review, sentiment, date) VALUES (?,?,DATETIME('now'))", (example2,0))
-conn.commit()
-conn.close()
